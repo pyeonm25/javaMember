@@ -38,7 +38,7 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return String.format("%s : %s : %s", id, pw, name);
+		return String.format("%s \t %s \t %s", id, pw, name);
 	}
 	
 	
