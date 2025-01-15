@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class MemberDAO {
 	private ArrayList<Member> memberList;
+	private Utils utils;
 
 	public MemberDAO() {
 		memberList = new ArrayList();
+		utils = Utils.getInstance();
 		//addDummyMembers();
 	}
 	
@@ -20,7 +22,7 @@ public class MemberDAO {
 	}
 	public void join() {
 		// 회원가입 로직 
-		String id = Utils.getStringValue("[추가] 아이디 입력 >>");
+		String id = utils.getStringValue("[추가] 아이디 입력 >>");
 		if(isValidMemberId(id)) {
 			System.out.println("[ 이미 존재하는 아이디입니다]");
 			System.out.println("[ 추가 실패 ]");
@@ -28,8 +30,8 @@ public class MemberDAO {
 			
 		}
 		
-		String pw = Utils.getStringValue("[추가] 비밀번호 입력 >> ");
-		String name = Utils.getStringValue("[추가] 이름 입력 >> ");
+		String pw = utils.getStringValue("[추가] 비밀번호 입력 >> ");
+		String name = utils.getStringValue("[추가] 이름 입력 >> ");
 		
 		insertMember(new Member(id, pw, name));
 		System.out.println("[ 회원 가입 성공 ]");
@@ -59,7 +61,7 @@ public class MemberDAO {
 
 	public void delete() {
 		if(!exsitData()) return;
-		String id = Utils.getStringValue("[삭제] 아이디입력 : ");
+		String id = utils.getStringValue("[삭제] 아이디입력 : ");
 		if(!isValidMemberId(id)) {
 			System.out.println("[존재하지 않는 id 입니다]");
 			return;
@@ -99,13 +101,13 @@ public class MemberDAO {
 
 	public void update() {
 		if(!exsitData()) return;
-		String id = Utils.getStringValue("[수정] 아이디 입력 >> ");
+		String id = utils.getStringValue("[수정] 아이디 입력 >> ");
 		if(!isValidMemberId(id)) {
 			System.out.println("[ 존재하지 않는 아이디 입니다 ]");
 			return;
 		}
 		
-		String pw = Utils.getStringValue("[수정] 비밀번호 입력 >> ");
+		String pw = utils.getStringValue("[수정] 비밀번호 입력 >> ");
 		Member member =  getAMemberById(id);
 		if(member.getPw().equals(pw)) {
 			System.out.println("[ 현재와 다른 비밀번호를 입력하세요 ]");

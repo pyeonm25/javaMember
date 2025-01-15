@@ -10,13 +10,21 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Utils {
+	
+	private Utils() {}
+	private static Utils instance;
 
-	private static Scanner sc = new Scanner(System.in);
-	private static final String CUR_PATH = System.getProperty("user.dir") + "\\src\\" + Utils.class.getPackageName()
+	public static Utils getInstance() {
+		if(instance == null) instance = new Utils();
+		return instance;
+	}
+	
+	private Scanner sc = new Scanner(System.in);
+	private  final String CUR_PATH = System.getProperty("user.dir") + "\\src\\" + Utils.class.getPackageName()
 			+ "\\";
-	private static final String filePath = CUR_PATH + "member.txt";
+	private  final String filePath = CUR_PATH + "member.txt";
 
-	public static int getIntValue(String msg, int start, int end) {
+	public  int getIntValue(String msg, int start, int end) {
 		System.out.printf("[%d -%d ] %s >> ", start, end, msg);
 		while (true) {
 			try {
@@ -36,7 +44,7 @@ public class Utils {
 		}
 	}
 
-	public static String getStringValue(String msg) {
+	public  String getStringValue(String msg) {
 		System.out.println(msg);
 		while(true) {
 			String value = sc.nextLine();
@@ -48,7 +56,7 @@ public class Utils {
 		}
 	}
 	
-	public static void saveDataToFile(String data) {
+	public  void saveDataToFile(String data) {
 		if(data == null) return;
 		
 		try(FileWriter fw = new FileWriter(filePath)){
@@ -59,7 +67,7 @@ public class Utils {
 		}
 	}
 
-	public static String loadDataFromFile() {
+	public  String loadDataFromFile() {
 		String data = "";
 		
 		try(FileReader fr = new FileReader(filePath); BufferedReader br = new BufferedReader(fr);){
